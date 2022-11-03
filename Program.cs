@@ -1,7 +1,12 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using contosorazor.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<contosorazorContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("contosorazorContext") ?? throw new InvalidOperationException("Connection string 'contosorazorContext' not found.")));
 
 var app = builder.Build();
 
